@@ -1,234 +1,229 @@
-<p align="center">
-    <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://www.yiiframework.com/image/design/logo/yii3_full_for_dark.svg">
-        <source media="(prefers-color-scheme: light)" srcset="https://www.yiiframework.com/image/design/logo/yii3_full_for_light.svg">
-        <img src="https://www.yiiframework.com/image/design/logo/yii3_full_for_light.svg" alt="Yii Framework" height="100">
-    </picture>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
-    <br>
-</p>
+# Use Daraja
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](https://www.yiiframework.com/) application best for
-rapidly creating small projects.
+Yii2 web app for exercising Safaricom Daraja services from a field-based interface. It wraps the installed `josemodi97/yii2-safaricom-daraja` component with local service interfaces and user-facing request forms.
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
+## Features
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg?style=for-the-badge&label=Stable&logo=packagist)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg?style=for-the-badge&label=Downloads)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![build](https://img.shields.io/github/actions/workflow/status/yiisoft/yii2-app-basic/build.yml?style=for-the-badge&logo=github&label=Build)](https://github.com/yiisoft/yii2-app-basic/actions?query=workflow%3Abuild)
-[![codecov](https://img.shields.io/codecov/c/github/yiisoft/yii2-app-basic.svg?style=for-the-badge&logo=codecov&logoColor=white&label=Codecov)](https://codecov.io/gh/yiisoft/yii2-app-basic)
-[![Static Analysis](https://img.shields.io/github/actions/workflow/status/yiisoft/yii2-app-basic/static.yml?style=for-the-badge&label=Static)](https://github.com/yiisoft/yii2-app-basic/actions/workflows/static.yml)
+- Daraja service menu for STK Push, C2B, B2B/B2C/B2Pochi, transactions, Ratiba, Lipa na Bonga, subscriber checks, pull transactions, and IoT SIM Portal.
+- Field-based request forms instead of raw JSON payload editing.
+- STK Push password generation on submit from shortcode, passkey, and timestamp.
+- Internal STK `PartyA` and `PartyB` handling: users only enter the phone number and shortcode.
+- `.env`-driven credentials with `.env.example` committed and `.env` ignored.
+- Optional endpoint override support for Daraja APIs whose sandbox path differs from the package catalog.
 
-<picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/home-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="docs/images/home-light.png">
-    <img src="docs/images/home-light.png" alt="Web Application Basic">
-</picture>
+## Screenshots
 
-## Docker
+Use the top navigation menu and choose **Daraja**. The services page lists every supported Daraja API group.
 
-[![Apache](https://img.shields.io/github/actions/workflow/status/yiisoft/yii2-app-basic/docker.yml?style=for-the-badge&logo=apache&label=Apache)](https://github.com/yiisoft/yii2-app-basic/actions/workflows/docker.yml)
+![Daraja services overview](docs/screenshots/daraja-services.png)
 
-DIRECTORY STRUCTURE
--------------------
+### STK Push
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
+Open **Daraja -> STK Push**. The app hides generated/internal fields and generates the STK password before submitting.
 
-REQUIREMENTS
-------------
+![STK Push process request](docs/screenshots/stk-push-process-request.png)
 
-The minimum requirement by this project template that your Web server supports PHP 8.2.
+![STK Push query payment](docs/screenshots/stk-push-query-payment.png)
 
-INSTALLATION
-------------
+### C2B
 
-> [!IMPORTANT]
-> - The minimum required [PHP](https://www.php.net/) version of Yii is PHP `8.2`.
+![C2B register URLs](docs/screenshots/c2b-register-urls.png)
 
-## Install via Composer
+![C2B simulate payment](docs/screenshots/c2b-simulate-payment.png)
 
-If you do not have [Composer](https://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](https://getcomposer.org/doc/00-intro.md#installation-nix).
+### Business Payments
 
-You can then install this project template using the following command:
+![B2C payment](docs/screenshots/business-b2c-payment.png)
 
-~~~
-composer create-project --prefer-dist yiisoft/yii2-app-basic basic
-~~~
+![B2B payment](docs/screenshots/business-b2b-payment.png)
 
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
+![B2Pochi payment](docs/screenshots/business-b2pochi-payment.png)
 
-~~~
-http://localhost/basic/web/
-~~~
+### Transactions
 
-## Install from an Archive File
+![Transaction reversal](docs/screenshots/transactions-reversal.png)
 
-Extract the archive file downloaded from [yiiframework.com](https://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
+![Transaction status](docs/screenshots/transactions-status.png)
 
-Set cookie validation key in `config/web.php` file to some random secret string:
+![Account balance](docs/screenshots/transactions-account-balance.png)
 
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
+### Ratiba
+
+![Ratiba Paybill standing order](docs/screenshots/ratiba-paybill-standing-order.png)
+
+![Ratiba Buy Goods standing order](docs/screenshots/ratiba-buy-goods-standing-order.png)
+
+### Lipa na Bonga
+
+The page shows the exact Safaricom URL being called, which helps when checking sandbox endpoint availability.
+
+![Lipa na Bonga redeem Paybill](docs/screenshots/lipa-na-bonga-redeem-paybill.png)
+
+![Lipa na Bonga calculate points](docs/screenshots/lipa-na-bonga-calculate-points.png)
+
+### Subscriber Info
+
+![IMSI CheckATI](docs/screenshots/subscriber-imsi-checkati.png)
+
+![SWAP CheckATI](docs/screenshots/subscriber-swap-checkati.png)
+
+### Pull Transactions
+
+![Pull Transactions register callback](docs/screenshots/pull-register-callback.png)
+
+![Pull Transactions query](docs/screenshots/pull-query-transactions.png)
+
+### IoT SIM Portal
+
+![IoT search messages](docs/screenshots/iot-search-messages.png)
+
+![IoT filter messages](docs/screenshots/iot-filter-messages.png)
+
+![IoT delete message thread](docs/screenshots/iot-delete-message-thread.png)
+
+![IoT get all messages](docs/screenshots/iot-get-all-messages.png)
+
+![IoT send single message](docs/screenshots/iot-send-single-message.png)
+
+![IoT delete message](docs/screenshots/iot-delete-message.png)
+
+![IoT all SIMs](docs/screenshots/iot-all-sims.png)
+
+![IoT lifecycle status](docs/screenshots/iot-lifecycle-status.png)
+
+![IoT customer info](docs/screenshots/iot-customer-info.png)
+
+![IoT SIM activation](docs/screenshots/iot-sim-activation.png)
+
+![IoT activation trends](docs/screenshots/iot-activation-trends.png)
+
+![IoT rename asset](docs/screenshots/iot-rename-asset.png)
+
+![IoT location info](docs/screenshots/iot-location-info.png)
+
+![IoT suspend or unsuspend subscriber](docs/screenshots/iot-suspend-unsuspend.png)
+
+## Requirements
+
+- PHP 8.2 or later
+- Composer
+- Yii2 dependencies installed with `composer install`
+- A Safaricom Daraja sandbox or production app
+
+## Setup
+
+Install dependencies:
+
+```bash
+composer install
 ```
 
-You can then access the application through the following URL:
+Create your local environment file:
 
-~~~
-http://localhost/basic/web/
-~~~
-
-## Install with Docker
-
-Update your vendor packages
-
-    docker-compose run --rm php composer update --prefer-dist
-    
-Run the installation triggers (creating cookie validation code)
-
-    docker-compose run --rm php composer install    
-    
-Start the container
-
-    docker-compose up -d
-    
-You can then access the application through the following URL:
-
-    http://127.0.0.1:8000
-
-Run tests inside the container
-
-    docker compose exec -T php vendor/bin/codecept build
-    docker compose exec -T php vendor/bin/codecept run
-
-**NOTES:** 
-- Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
-- The default configuration uses a host-volume in your home directory `~/.composer-docker/cache` for Composer caches
-
-
-CONFIGURATION
--------------
-
-## Database
-
-Edit the file `config/db.php` with real data, for example:
-
-```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '1234',
-    'charset' => 'utf8',
-];
+```bash
+copy .env.example .env
 ```
 
-**NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
+Then edit `.env` with your real Daraja credentials.
 
-TESTING
--------
+Required STK/Daraja values:
 
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](https://codeception.com/).
-By default, there are 3 test suites:
-
-- `unit`
-- `functional`
-- `acceptance`
-
-Tests can be executed by running
-
-```
-vendor/bin/codecept run --env php-builtin
+```env
+DARAJA_ENVIRONMENT=sandbox
+DARAJA_ENV=sandbox
+DARAJA_CONSUMER_KEY=your_consumer_key
+DARAJA_CONSUMER_SECRET=your_consumer_secret
+DARAJA_SHORT_CODE=174379
+DARAJA_SHORTCODE=174379
+DARAJA_PASSKEY=your_stk_passkey
+DARAJA_CALLBACK_BASE_URL=https://your-domain.example
 ```
 
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction.
+Optional values:
 
-
-## Acceptance tests
-
-The `acceptance` suite is configured in `tests/Acceptance.suite.yml`.
-
-### Acceptance tests (PhpBrowser)
-
-By default, acceptance tests use the `PhpBrowser` module and run against the built-in PHP web server started via the
-`php-builtin` environment.
-
-```
-# run all tests with built-in web server
-composer tests
-
-# run acceptance tests only
-vendor/bin/codecept run Acceptance --env php-builtin
+```env
+DARAJA_CALLBACK_SECRET=your_callback_secret
+DARAJA_TEST_PHONE=254700000000
+DARAJA_INITIATOR_NAME=your_initiator_name
+DARAJA_INITIATOR_PASSWORD=your_initiator_password
+DARAJA_SECURITY_CREDENTIAL=your_encrypted_security_credential
+DARAJA_IOT_API_KEY=your_iot_api_key
+DARAJA_IOT_MSISDN=254700000000
 ```
 
-### Acceptance tests (WebDriver + Selenium)
+Start the app:
 
-To run acceptance tests in a real browser, switch the `acceptance` suite to use the `WebDriver` module.
-`tests/Acceptance.suite.yml` contains an example WebDriver configuration (commented).
-
-1. Download and start [Selenium Server](https://www.selenium.dev/downloads/).
-2. Install the corresponding browser driver (for example. [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or
-   [ChromeDriver](https://googlechromelabs.github.io/chrome-for-testing/)).
-3. Update `tests/Acceptance.suite.yml` to enable `WebDriver` and disable `PhpBrowser`.
-4. Run:
-
-```
-vendor/bin/codecept run Acceptance --env php-builtin
+```bash
+php -S localhost:8080 -t web
 ```
 
-## Code coverage support
+Open:
 
-Code coverage is configured in `codeception.yml`. You can run your tests and collect coverage with the following command:
-
-```
-#collect coverage for all tests
-vendor/bin/codecept run --coverage --coverage-html --coverage-xml --env php-builtin
-
-#collect coverage only for unit tests
-vendor/bin/codecept run Unit --coverage --coverage-html --coverage-xml --env php-builtin
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run Functional,Unit --coverage --coverage-html --coverage-xml --env php-builtin
+```text
+http://localhost:8080
 ```
 
-You can see code coverage output under the `tests/Support/output` directory.
+## How To Use
 
-## Documentation
+1. Open `http://localhost:8080`.
+2. Click **Daraja** in the menu.
+3. Select a service group and endpoint.
+4. Fill in the visible fields.
+5. Click **Send request**.
+6. Review the response panel under the form.
 
-- [Internals](docs/internals.md)
+For STK Push, use a phone number in `2547XXXXXXXX` format. The form hides `PartyA`, `PartyB`, and `Password` because the app derives them before sending the request.
 
-## Support the project
+## Endpoint Overrides
 
-[![Open Collective](https://img.shields.io/badge/Open%20Collective-sponsor-7eadf1?style=for-the-badge&logo=open%20collective&logoColor=7eadf1&labelColor=555555)](https://opencollective.com/yiisoft)
+Some less common Daraja APIs can return `404` if Safaricom changes the sandbox path or exposes a different path in your Daraja portal. You can override a package endpoint path from `.env` without editing `vendor`.
 
-## Follow updates
+Example:
 
-[![Official website](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=for-the-badge&logo=yii)](https://www.yiiframework.com/)
-[![Follow on X](https://img.shields.io/badge/-Follow%20on%20X-1DA1F2.svg?style=for-the-badge&logo=x&logoColor=white&labelColor=000000)](https://x.com/yiiframework)
-[![Telegram](https://img.shields.io/badge/telegram-join-1DA1F2?style=for-the-badge&logo=telegram)](https://t.me/yii_framework_in_english)
-[![Slack](https://img.shields.io/badge/slack-join-1DA1F2?style=for-the-badge&logo=slack)](https://yiiframework.com/go/slack)
+```env
+DARAJA_ENDPOINT_LIPA_NA_BONGA_CALCULATE_POINTS=/v1/lipa/na/bonga/calculator-points
+```
 
-## License
+The request page displays the full URL being called so you can compare it with the Safaricom portal.
 
-[![License](https://img.shields.io/badge/License-BSD--3--Clause-brightgreen.svg?style=for-the-badge&logo=opensourceinitiative&logoColor=white&labelColor=555555)](LICENSE.md)
+## Troubleshooting
+
+### STK Push: Invalid Password
+
+Safaricom expects:
+
+```text
+base64_encode(BusinessShortCode + Passkey + Timestamp)
+```
+
+The app now generates that value automatically on submit. If the error persists, confirm:
+
+- `DARAJA_PASSKEY` is correct.
+- `BusinessShortCode` matches the passkey.
+- `Timestamp` is in `YYYYMMDDHHMMSS` format.
+- You are using the correct sandbox or production environment.
+
+### Lipa na Bonga: HTTP 404
+
+If Lipa na Bonga is enabled but returns `404`, compare the URL shown on the request page with the URL in your Daraja sandbox portal. If they differ, set an endpoint override in `.env`.
+
+## Project Structure
+
+```text
+components/daraja/          Daraja service adapter
+components/daraja/contracts Service interfaces
+controllers/DarajaController.php
+models/DarajaRequestForm.php
+views/daraja/               Daraja service pages
+docs/screenshots/           README screenshots
+```
+
+## Quality Checks
+
+Run syntax and coding-standard checks:
+
+```bash
+php -l controllers/DarajaController.php
+php -l models/DarajaRequestForm.php
+vendor/bin/phpcs controllers models components views
+```

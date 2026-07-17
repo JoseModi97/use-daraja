@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div>
             <h1 class="h2 mb-2"><?= Html::encode($this->title) ?></h1>
             <p class="text-body-secondary mb-0">
-                Choose a Safaricom Daraja service, edit its request JSON, and send it from this app.
+                Choose a Safaricom Daraja service, fill in the request fields, and send it from this app.
             </p>
         </div>
     </div>
