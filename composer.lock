@@ -339,16 +339,16 @@
         },
         {
             "name": "josemodi97/yii2-safaricom-daraja",
-            "version": "v1.0.3",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JoseModi97/yii2-safaricom-daraja.git",
-                "reference": "7eb905d579b8687d203f7bc2eadb9db3ad224142"
+                "reference": "08da58016d3dc7425988225a2deea4c319d0e966"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JoseModi97/yii2-safaricom-daraja/zipball/7eb905d579b8687d203f7bc2eadb9db3ad224142",
-                "reference": "7eb905d579b8687d203f7bc2eadb9db3ad224142",
+                "url": "https://api.github.com/repos/JoseModi97/yii2-safaricom-daraja/zipball/08da58016d3dc7425988225a2deea4c319d0e966",
+                "reference": "08da58016d3dc7425988225a2deea4c319d0e966",
                 "shasum": ""
             },
             "require": {
@@ -396,7 +396,7 @@
                 "issues": "https://github.com/JoseModi97/yii2-safaricom-daraja/issues",
                 "source": "https://github.com/JoseModi97/yii2-safaricom-daraja"
             },
-            "time": "2026-07-16T14:04:24+00:00"
+            "time": "2026-07-18T12:50:57+00:00"
         },
         {
             "name": "paragonie/random_compat",
