@@ -256,6 +256,16 @@ class DarajaService extends Component implements DarajaServiceInterface
         return $this->getClient()->generateSecurityCredential($initiatorPassword, $certificatePath);
     }
 
+    public function getCallbackBaseUrl($fallbackToRequest = true)
+    {
+        return $this->getClient()->getCallbackBaseUrl($fallbackToRequest);
+    }
+
+    public function buildCallbackUrl($path, $baseUrl = null)
+    {
+        return $this->getClient()->buildCallbackUrl($path, $baseUrl);
+    }
+
     protected function getClient()
     {
         if (!$this->client instanceof Daraja) {

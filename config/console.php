@@ -26,6 +26,7 @@ $config = [
             'environment' => getenv('DARAJA_ENVIRONMENT') ?: getenv('DARAJA_ENV') ?: 'sandbox',
             'consumerKey' => getenv('DARAJA_CONSUMER_KEY'),
             'consumerSecret' => getenv('DARAJA_CONSUMER_SECRET'),
+            'callbackBaseUrl' => getenv('DARAJA_CALLBACK_BASE_URL') ?: null,
         ],
         'darajaService' => [
             'class' => \app\components\daraja\DarajaService::class,

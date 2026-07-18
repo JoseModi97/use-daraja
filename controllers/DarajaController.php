@@ -182,7 +182,6 @@ class DarajaController extends Controller
         $shortCode = getenv('DARAJA_SHORT_CODE') ?: getenv('DARAJA_SHORTCODE') ?: '174379';
         $passkey = getenv('DARAJA_PASSKEY') ?: '';
         $phone = getenv('DARAJA_TEST_PHONE') ?: '254700000000';
-        $callback = getenv('DARAJA_CALLBACK_BASE_URL') ?: 'https://example.com';
         $initiator = getenv('DARAJA_INITIATOR_NAME') ?: 'testapi';
         $credential = getenv('DARAJA_SECURITY_CREDENTIAL') ?: '';
         $timestamp = date('YmdHis');
@@ -198,7 +197,7 @@ class DarajaController extends Controller
                 'PartyA' => $phone,
                 'PartyB' => $shortCode,
                 'PhoneNumber' => $phone,
-                'CallBackURL' => $callback . '/daraja/stk-callback',
+                'CallBackURL' => $this->daraja->buildCallbackUrl('/daraja/stk-callback'),
                 'AccountReference' => 'INV-1001',
                 'TransactionDesc' => 'Invoice payment',
             ],
@@ -211,8 +210,8 @@ class DarajaController extends Controller
             EndpointCatalog::C2B_REGISTER_URL => [
                 'ShortCode' => $shortCode,
                 'ResponseType' => 'Completed',
-                'ConfirmationURL' => $callback . '/daraja/c2b-confirmation',
-                'ValidationURL' => $callback . '/daraja/c2b-validation',
+                'ConfirmationURL' => $this->daraja->buildCallbackUrl('/daraja/c2b-confirmation'),
+                'ValidationURL' => $this->daraja->buildCallbackUrl('/daraja/c2b-validation'),
             ],
             EndpointCatalog::C2B_SIMULATE => [
                 'ShortCode' => $shortCode,
@@ -229,8 +228,8 @@ class DarajaController extends Controller
                 'PartyA' => $shortCode,
                 'PartyB' => $phone,
                 'Remarks' => 'Payout',
-                'QueueTimeOutURL' => $callback . '/daraja/timeout',
-                'ResultURL' => $callback . '/daraja/result',
+                'QueueTimeOutURL' => $this->daraja->buildCallbackUrl('/daraja/timeout'),
+                'ResultURL' => $this->daraja->buildCallbackUrl('/daraja/result'),
                 'Occasion' => 'Refund',
             ],
             EndpointCatalog::B2B_PAYMENT => [
@@ -244,8 +243,8 @@ class DarajaController extends Controller
                 'PartyB' => '600000',
                 'AccountReference' => 'INV-1001',
                 'Remarks' => 'Supplier payment',
-                'QueueTimeOutURL' => $callback . '/daraja/timeout',
-                'ResultURL' => $callback . '/daraja/result',
+                'QueueTimeOutURL' => $this->daraja->buildCallbackUrl('/daraja/timeout'),
+                'ResultURL' => $this->daraja->buildCallbackUrl('/daraja/result'),
             ],
             EndpointCatalog::B2POCHI_PAYMENT => [
                 'OriginatorConversationID' => uniqid('b2pochi-', true),
@@ -256,8 +255,8 @@ class DarajaController extends Controller
                 'PartyA' => $shortCode,
                 'PartyB' => $phone,
                 'Remarks' => 'B2Pochi payment',
-                'QueueTimeOutURL' => $callback . '/daraja/timeout',
-                'ResultURL' => $callback . '/daraja/result',
+                'QueueTimeOutURL' => $this->daraja->buildCallbackUrl('/daraja/timeout'),
+                'ResultURL' => $this->daraja->buildCallbackUrl('/daraja/result'),
                 'Occasion' => 'Payment',
             ],
             EndpointCatalog::REVERSAL => [
@@ -268,8 +267,8 @@ class DarajaController extends Controller
                 'Amount' => '100',
                 'ReceiverParty' => $shortCode,
                 'RecieverIdentifierType' => '4',
-                'ResultURL' => $callback . '/daraja/result',
-                'QueueTimeOutURL' => $callback . '/daraja/timeout',
+                'ResultURL' => $this->daraja->buildCallbackUrl('/daraja/result'),
+                'QueueTimeOutURL' => $this->daraja->buildCallbackUrl('/daraja/timeout'),
                 'Remarks' => 'Customer refund',
                 'Occasion' => 'Refund',
             ],
@@ -280,8 +279,8 @@ class DarajaController extends Controller
                 'TransactionID' => 'ABC123XYZ',
                 'PartyA' => $shortCode,
                 'IdentifierType' => '4',
-                'ResultURL' => $callback . '/daraja/result',
-                'QueueTimeOutURL' => $callback . '/daraja/timeout',
+                'ResultURL' => $this->daraja->buildCallbackUrl('/daraja/result'),
+                'QueueTimeOutURL' => $this->daraja->buildCallbackUrl('/daraja/timeout'),
                 'Remarks' => 'Status query',
                 'Occasion' => 'Status',
             ],
@@ -292,8 +291,8 @@ class DarajaController extends Controller
                 'PartyA' => $shortCode,
                 'IdentifierType' => '4',
                 'Remarks' => 'Balance query',
-                'QueueTimeOutURL' => $callback . '/daraja/timeout',
-                'ResultURL' => $callback . '/daraja/result',
+                'QueueTimeOutURL' => $this->daraja->buildCallbackUrl('/daraja/timeout'),
+                'ResultURL' => $this->daraja->buildCallbackUrl('/daraja/result'),
             ],
             EndpointCatalog::RATIBA_CREATE_PAYBILL => [
                 'StandingOrderName' => 'Monthly fee',
@@ -302,7 +301,7 @@ class DarajaController extends Controller
                 'Amount' => '100',
                 'PartyA' => $phone,
                 'ReceiverPartyIdentifierType' => '4',
-                'CallBackURL' => $callback . '/daraja/ratiba-callback',
+                'CallBackURL' => $this->daraja->buildCallbackUrl('/daraja/ratiba-callback'),
                 'AccountReference' => 'ACC-1001',
                 'TransactionDesc' => 'Monthly payment',
                 'Frequency' => '1',
@@ -316,7 +315,7 @@ class DarajaController extends Controller
                 'Amount' => '100',
                 'PartyA' => $phone,
                 'ReceiverPartyIdentifierType' => '2',
-                'CallBackURL' => $callback . '/daraja/ratiba-callback',
+                'CallBackURL' => $this->daraja->buildCallbackUrl('/daraja/ratiba-callback'),
                 'AccountReference' => 'ACC-1001',
                 'TransactionDesc' => 'Merchant payment',
                 'Frequency' => '1',
@@ -344,7 +343,7 @@ class DarajaController extends Controller
                 'ShortCode' => $shortCode,
                 'RequestType' => 'Pull',
                 'NominatedNumber' => $phone,
-                'CallBackURL' => $callback . '/daraja/pull-callback',
+                'CallBackURL' => $this->daraja->buildCallbackUrl('/daraja/pull-callback'),
             ],
             EndpointCatalog::PULL_QUERY => [
                 'ShortCode' => $shortCode,

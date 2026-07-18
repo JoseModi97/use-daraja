@@ -125,6 +125,7 @@ copy .env.example .env
 ```
 
 Then edit `.env` with your real Daraja credentials.
+If you are testing unreleased extension changes locally, point this app's Composer repository to the local `yii2-safaricom-daraja` folder and run `composer update josemodi97/yii2-safaricom-daraja`. Otherwise, install the package version that includes `buildCallbackUrl()` before using the callback-enabled forms.
 
 Required STK/Daraja values:
 
@@ -136,12 +137,12 @@ DARAJA_CONSUMER_SECRET=your_consumer_secret
 DARAJA_SHORT_CODE=174379
 DARAJA_SHORTCODE=174379
 DARAJA_PASSKEY=your_stk_passkey
-DARAJA_CALLBACK_BASE_URL=https://your-domain.example
 ```
 
 Optional values:
 
 ```env
+DARAJA_CALLBACK_BASE_URL=https://your-domain.example
 DARAJA_CALLBACK_SECRET=your_callback_secret
 DARAJA_TEST_PHONE=254700000000
 DARAJA_INITIATOR_NAME=your_initiator_name
@@ -173,6 +174,14 @@ http://localhost:8080
 6. Review the response panel under the form.
 
 For STK Push, use a phone number in `2547XXXXXXXX` format. The form hides `PartyA`, `PartyB`, and `Password` because the app derives them before sending the request.
+
+## Callback URLs
+
+The app now lets the installed Daraja extension build callback URLs for STK Push, C2B registration, business payments, transactions, Ratiba, and Pull Transactions. In a deployed housing application, the extension can usually derive the base URL from the current Yii web request, so users do not need to type callback URLs into the forms.
+
+Set `DARAJA_CALLBACK_BASE_URL` when the app runs behind a reverse proxy, when a console or queue process builds the payload, or when you want to force a specific public domain.
+
+`localhost` cannot receive Safaricom callbacks directly. For local testing, run the Yii app locally, expose it with a public HTTPS tunnel such as ngrok or Cloudflare Tunnel, then set `DARAJA_CALLBACK_BASE_URL` to that tunnel URL.
 
 ## Endpoint Overrides
 
